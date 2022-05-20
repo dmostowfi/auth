@@ -10,8 +10,10 @@ class SessionsController < ApplicationController
         if @user #checks if user is in database
         #step 1a: if yes, check password (go to step 2)
         #step 2: check password to see if it matches user's password
-            if params["password"] == @user["password"] #params["password"] is the password that was typed in 
-            #step 2a: if yes, go to companies page 
+            if params["password"] == BCrypt::Password.new(@user["password"]) #params["password"] is the password that was typed in 
+                                #the BCrypt is checking the encrypted (params, see users controller) against the decrypted password 
+                #step 2a: if yes, go to companies page 
+                session["user_id"] = @user["id"]
                 flash["notice"] = "You're in!"
                 redirect_to "/companies"
             else
