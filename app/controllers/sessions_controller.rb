@@ -12,13 +12,16 @@ class SessionsController < ApplicationController
         #step 2: check password to see if it matches user's password
             if params["password"] == @user["password"] #params["password"] is the password that was typed in 
             #step 2a: if yes, go to companies page 
+                flash["notice"] = "You're in!"
                 redirect_to "/companies"
             else
             #step 2b: if no, go back to login page
+                flash["notice"] = "Incorrect credentials :("
                 redirect_to "/sessions/new"
             end
         else
         #step 1b: if no, go back to login page  
+            flash["notice"] = "Incorrect credentials :("
             redirect_to "/sessions/new"
         end
     end
