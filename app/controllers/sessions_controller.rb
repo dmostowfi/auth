@@ -27,4 +27,11 @@ class SessionsController < ApplicationController
             redirect_to "/sessions/new"
         end
     end
+
+    def destroy #logout, how to destroy a sessions
+        flash["see ya later!"]
+        session["user_id"] = nil
+        redirect_to "/sessions/new"
+    end
+
 end

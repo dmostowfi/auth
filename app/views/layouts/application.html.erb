@@ -12,9 +12,10 @@
   <body>
     <p>
     <% if @current_user #if it exists%>
+      <a href="/logout">Logout |</a>
       Hi, <%=@current_user["first_name"]%>
       <%else%>
-      <a href="/sessions/new">Login |</a>  
+      <a href="/login">Login |</a>  
       <a href="/users/new">Sign Up</a>
       <%end%>
     </p>
