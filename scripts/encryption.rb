@@ -9,7 +9,8 @@ secret = "tacos"
 encrypted_secret = BCrypt::Password.create(secret)
 
 puts encrypted_secret
-# 2. decrypt the encrypted string
+
+# 2. decrypt the encrypted string (how we check encrypted against decrypted)
 
 decrypted_secret = BCrypt::Password.new(encrypted_secret)
 puts decrypted_secret #this doesn't input tacos. it's simply there to do the comparison to the encrypted
@@ -18,3 +19,6 @@ puts decrypted_secret #this doesn't input tacos. it's simply there to do the com
 
 puts "is the password tacos?"
 puts decrypted_secret == "tacos"
+
+puts "is the password dogs?"
+puts decrypted_secret == "dogs"
