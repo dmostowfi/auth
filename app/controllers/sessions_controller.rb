@@ -13,16 +13,18 @@ class SessionsController < ApplicationController
         
             #step 2: check password to see if it matches user's password
             if params["password"] == BCrypt::Password.new(@user["password"])  
-                #params["password"] is the password that was typed in                
+                #params["password"] is the password that was typed in  
+                #BCrypt.new is the decrypted version              
                 #the BCrypt is checking the encrypted params (see users controller) against the decrypted password 
                 
                 #step 2a: if yes, go to companies page 
                 session["user_id"] = @user["id"]
-                flash["notice"] = "You're in!"
+                #when we log in successfully, we set key: session["user_id"] equal to @user["id"] 
+                flash["notice"] = "Welcome, #{@user["first_name"]}."
                 redirect_to "/companies"
             else
             #step 2b: if no, go back to login page
-                flash["notice"] = "Incorrect credentials :("
+                flash["notice"] = "Nope :("
                 redirect_to "/sessions/new"
             end
         
