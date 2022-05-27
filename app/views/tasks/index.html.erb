@@ -1,19 +1,20 @@
 <h1>Do the TODOs</h1>
+<%if @current_user #As an anonymous user, I cannot create new tasks%> 
+    <%= form_with :model => @task do |form| %>
+      <%= form.text_field "description" %>
+      <%= form.submit "Add new task" %>
+    <% end %>
 
-<%= form_with :model => @task do |form| %>
-  <%= form.text_field "description" %>
-  <%= form.submit "Add new task" %>
-<% end %>
-
-<table>
-  <% for task in @tasks %>
-    <tr>
-      <td>
-        <%= task["description"] %>
-      </td>
-      <td>
-        <%= button_to "Complete", task, :method => "delete" %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+    <table>
+      <% for task in @tasks %>
+        <tr>
+          <td>
+            <%= task["description"] %>
+          </td>
+          <td>
+            <%= button_to "Complete", task, :method => "delete" %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+<%end%>
